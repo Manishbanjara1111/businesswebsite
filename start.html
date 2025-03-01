@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Cup Nepal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            font-size: 16px;
+        }
+
+        header {
+            background: transparent;
+            color: white;
+            padding: 20px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        header.scrolled {
+            background: #3498db;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .company-logo img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin-left: auto;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0 10%;
+            background-color: rgba(14, 13, 13, 0.808);
+            background-image: url("hero.webp");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .hero-logo img {
+        height: 30rem;
+        width: auto;
+        margin-top: 8rem;
+        animation: logoFadeIn 1.5s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: brightness(); /* Make the logo bright */
+        transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Add transition for popping effect */
+    }
+
+    .hero-logo img:hover {
+        transform: scale(1.1); /* Scale up the logo on hover */
+        filter: brightness(2); /* Increase brightness on hover */
+    }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes logoFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CSS for About Section */
+        .section-content {
+            display: flex;
+            align-items: center;
+            padding: 50px 10%;
+            background-color: #f0e9e967;
+            text-align: left;
+        }
+
+        .section-image {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .section-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .section-text {
+            flex: 1;
+            padding: 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 10px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .section-text p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* CSS for Collaboration Partners Section */
+        .partners-section {
+            padding: 50px 10%;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+
+        .partners-section .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #3498db;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .partners-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .partner img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* CSS for Inauguration Section */
+        .inauguration-section {
+            padding: 50px 10%;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .inauguration-section .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #3498db;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .inauguration-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .inauguration-image {
+            flex: 1 1 30%; /* Adjust the flex-basis to control the width of the images */
+            max-width: 30%; /* Ensure the images do not exceed 30% of the container width */
+        }
+
+        .inauguration-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        #gov {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        #footer {
+            background: #3498db;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        #footer .footer-top {
+            padding-bottom: 30px;
+        }
+
+        #footer .footer-info {
+            margin-bottom: 30px;
+        }
+
+        #footer .footer-info img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        #footer .footer-info p {
+            font-size: 14px;
+            line-height: 24px;
+            margin-bottom: 0;
+        }
+
+        #footer .footer-links {
+            margin-bottom: 30px;
+        }
+
+        #footer .footer-links h4 {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        #footer .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #footer .footer-links ul li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        #footer .footer-links ul li a {
+            color: white;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        #footer .footer-links ul li a:hover {
+            color: #f82249;
+        }
+
+        #footer .footer-contact {
+            margin-bottom: 30px;
+        }
+
+        #footer .footer-contact h4 {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        #footer .footer-contact p {
+            font-size: 14px;
+            line-height: 24px;
+            margin-bottom: 0;
+        }
+
+        #footer .copyright {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 14px;
+        }
+
+        #footer .credits {
+            text-align: center;
+            font-size: 14px;
+            color: white;
+        }
+
+        th:nth-child(2) {
+            border-left: 1px solid #ddd;
+        }
+
+        th:nth-child(2)::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -1px; /* Adjust for slight overlap */
+            bottom: 0;
+            width: 1px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="company-logo">
+                <img src="logo.png" alt="Company Logo">
+            </div>
+            <div class="logo-text">Startup Cup Nepal</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <h1>Startup World Cup
+                <span style="color: #f82249;">Nepal Regional</span> 2024</h1>
+            <p>Empowering startups to innovate and grow with mentorship and guidance.</p>
+            <button onclick="learnMore()">Learn More</button>
+        </div>
+        <div class="hero-logo">
+            <img src="logo.png" alt="Hero Logo">
+        </div>
+    </section>
+    <section id="about" class="section-content">
+        <div class="section-image">
+            <img src="about.png" alt="About Us">
+        </div>
+        <div class="section-text">
+            <h2 class="section-heading">About Us</h2>
+            <p>Startup world cup Nepal regional competition is the all Nepal regional competition brought in this region by startup hub Nepal and World trade Group Nepal to foster the local innovation to reach the global platform. It is a global competition which provide chance to meet global startups, provides access to new deals all around the world, helps to build network with investors and corporate representatives and win the grand price of $1 million. Startups, Corporate companies and investors can join this competition event and get the benefits of networking, investment opportunities, meet the experts of the field.</p>
+        </div>
+    </section>
+
+    <!-- Collaboration Partners Section -->
+    <section id="collaboration-partners" class="partners-section">
+        <h2 class="section-heading">Collaboration Partners</h2>
+        <div class="partners-container">
+            <div class="partner">
+                <img src="collab3.png" alt="Partner 1">
+            </div>
+            <div class="partner">
+                <img src="collab2.jpeg" alt="Partner 2">
+            </div>
+            <div class="partner">
+                <img src="collab3.png" alt="Partner 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Inauguration Section -->
+    <section id="inauguration" class="inauguration-section">
+        <h2 class="section-heading">Inauguration by</h2>
+        <div class="inauguration-container">
+            <div class="inauguration-image">
+                <img src="https://swc.startuphubnepal.com/img/pm.jpeg" alt="Prime Minister of Nepal">
+            </div>
+        </div>
+    </section>
+
+    <!-- Inauguration Section with Multiple Images -->
+    <section id="gov" class="inauguration-section">
+        <h2 class="section-heading">Inauguration by</h2>
+        <div class="inauguration-container">
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 1">
+            </div>
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 2">
+            </div>
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 3">
+            </div>
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 4">
+            </div>
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 5">
+            </div>
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 6">
+            </div>
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 5">
+            </div>
+            <div class="inauguration-image">
+                <img src="collab1.png" alt="Image 6">
+            </div>
+        </div>
+    </section>
+
+    <table style="width: 50%; margin: 0 auto; border: 1px solid #ddd; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="text-align: center; padding: 10px;background-color: #fbff00; padding-right:123px; color: rgb(33, 8, 48); padding-right:123px;">StartUp</th>
+                <th style="text-align: center; padding: 10px; background-color: #fbff00;padding-right:386px;  color: rgb(33, 8, 48);">Project</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: rgb(0, 255, 255); font-weight: 500;">
+                <td style="padding-left: 15px;">1. Mach24 Orbitals</td>
+                <td style="padding-left: 25px;">Space Exploration</td>
+            </tr>
+            <tr style="background-color: rgb(33, 8, 48); color: white; font-weight: 500;">
+                <td style="padding-left: 15px;">2. sarm</td>
+                <td style="padding-left: 25px;">Energy Revolution</td>
+            </tr>
+            <tr style="background-color: rgb(0, 255, 255); font-weight: 500;">
+                <td style="padding-left: 15px;">3. GC R &amp; D</td>
+                <td style="padding-left: 25px;">Hydrogen Innovation</td>
+            </tr>
+            <tr style="background-color: rgb(33, 8, 48); color: white;">
+                <td style="padding-left: 15px;">4. TASK24</td>
+                <td style="padding-left: 25px;">Freelance Service Marketplace</td>
+            </tr>
+            <tr style="background-color: rgb(0, 255, 255); font-weight: 500;">
+                <td style="padding-left: 15px;">5. Orion Tech</td>
+                <td style="padding-left: 25px;">AI Based Retail</td>
+            </tr>
+            <tr style="background-color: rgb(33, 8, 48); color: white;">
+                <td style="padding-left: 15px;">6. MICKEY EVENTS</td>
+                <td style="padding-left: 25px;">Learning Platform</td>
+            </tr>
+            <tr style="background-color:rgb(0, 255, 255);">
+                <td style="padding-left: 15px;">7. T.R.F Upcycles</td>
+                <td style="padding-left: 25px;">Tyre Waste Magement</td>
+            </tr>
+            <tr style="background-color: rgb(33, 8, 48); color: white;">
+                <td style="padding-left: 15px;">8. SRIYOG Consulting</td>
+                <td style="padding-left: 25px;">Gig Economy based Professional Market place</td>
+            </tr>
+            <tr style="background-color: rgb(0, 255, 255); font-weight: 500;">
+                <td style="padding-left: 15px;">9. Virtuwell</td>
+                <td style="padding-left: 25px;">Healthcare Startup</td>
+            </tr>
+            <tr style="background-color:rgb(33, 8, 48) ; font-weight: 500;  color: white;">
+                <td style="padding-left: 15px;">10. Ekagajpatra</td>
+                <td style="padding-left: 25px;">Gov Service Improviser</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Footer Section -->
+    <footer id="footer">
+        <div class="footer-top">
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-3 col-md-6 footer-info"><img alt="Startup World Cup Nepal" src="img/logo.png" />
+        <p>Startup World Cup is a global competition which provides a chance to meet global startups, provides access to new deals all around the world, helps to build a network with investors and corporate representatives and win the grand prize of $1 million.</p>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 footer-info">
+        <h4>Find Us on Facebook!</h4>
+        
+        <div class="fb-page" data-adapt-container-width="true" data-height="250" data-hide-cover="false" data-href="https://www.facebook.com/Startuphubnepal" data-show-facepile="true" data-small-header="true" data-tabs="timeline" data-width="300">
+        <blockquote cite="https://www.facebook.com/Biztvnepal" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Biztvnepal">Business TV NEPAL</a></blockquote>
+        </div>
+        <!--<li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>--><!--<li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>--><!--<li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>--><!--<li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>--><!--<li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>--><!--</ul>--></div>
+        
+        <div class="col-lg-3 col-md-6 footer-links">
+        <h4>Useful Links</h4>
+        
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#speakers">Speakers</a></li>
+        </ul>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 footer-contact">
+        <h4>Contact Us</h4>
+        
+        <p>Kathmandu-32, Bagmati<br />
+        Nepal<br />
+        <strong>Phone:</strong> +977-9801088226<br />
+        <strong>Email:</strong> <a class="__cf_email__" data-cfemail="ec8d9c9c8095ac9f988d9e98999c84998e82899c8d80c28f8381" href="/cdn-cgi/l/email-protection">[email&nbsp;protected]</a></p>
+        <!--<div class="social-links">--><!--  <a href="https://twitter.com/startupktm2019" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>--><!--  <a href="https://www.facebook.com/Biztvnepal/" target="_blank"  class="facebook"><i class="fa fa-facebook"></i></a>--><!--  <a href="https://www.instagram.com/startupktm2019/" target="_blank" class="instagram"><i class="fa fa-instagram"></i></a>--><!--</div>--></div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="container">
+        <div class="copyright">&copy; Copyright 2019-2024<strong>Startup Hub Nepal</strong>. All Rights Reserved</div>
+        
+        <div class="credits">Designed by <a href="https://blackholeit.com/">Blackhole IT Solutions</a></div>
+        </div>
+        </footer>
+
+    <script>
+        function learnMore() {
+            alert('Learn more about Startup Cup Nepal!');
+        }
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+</body>
+</html>
